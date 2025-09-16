@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PR4ZZYX STORE - Top Up Game</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: white;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #161b22;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+    .game-card {
+      background: #21262d;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .game-card:hover {
+      transform: scale(1.05);
+      background: #30363d;
+    }
+    .game-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+    .game-card span {
+      display: block;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>🎮 PR4ZZYX STORE 🎮<br/>Top Up Game Murah & Aman</header>
+  <div class="game-grid" id="gameGrid"></div>
+
+  <script>
+    const waNumber = "6282130752012"; // Nomor WhatsApp kamu
+
+    const games = [
+      { name: "Mobile Legends", img: "https://play-lh.googleusercontent.com/8DCEV4VpWwfvX2gYdExg-8mO1SYcxw-VoC1nYtb0sK1vQbV8zqV5aOD87zGpClR7WA=s180" },
+      { name: "Free Fire", img: "https://play-lh.googleusercontent.com/6YtB4LxGFfua5D7nDfsr4x-5PXm13a5xZf8oU6JXvTgQzIPhZsI0X7l4wYF3MF0q_A=s180" },
+      { name: "PUBG Mobile", img: "https://play-lh.googleusercontent.com/FduVjIYKnWZ_X8qqzZs9x5OvlH0e4QuSHeM7LeZnRUnLsQFDT6AN-t3O_jUpr0lF9Io=s180" },
+      { name: "Call of Duty Mobile", img: "https://play-lh.googleusercontent.com/VgQUAzwZV1F1aWo9B7mYvUArvAqDymzROm4tXqkfNNpJBWlAbIYWq2WeHsU3Vau_3w=s180" },
+      { name: "Valorant", img: "https://seeklogo.com/images/V/valorant-logo-3D18F5D8F3-seeklogo.com.png" },
+      { name: "Genshin Impact", img: "https://play-lh.googleusercontent.com/0dYXYxDwp0UrEGouGZWlznImPi0tLxe3LjXLp8dkUBaRdOyqK8BPVKxHrsA4DlM4Xw=s180" },
+      { name: "Higgs Domino", img: "https://play-lh.googleusercontent.com/Ft8zQ09h9ZpWZ6N-3oEICoZpIEZqA8CByfNHnULWvDU9EiEN2SKWPpJZPiL5Ze-y2Q=s180" },
+      { name: "Roblox", img: "https://play-lh.googleusercontent.com/6mwtNmHg0Q6g3E9zraFMvx6bMpiKFFitvolSFZrxhgbf28pQ5e0MyoVo9hw3rroWAw=s180" },
+      { name: "Clash of Clans", img: "https://play-lh.googleusercontent.com/JVh3ZXApX2HFqRSbuuSSMzdON3NofM8Jr_tgNewc19hXtOD87o5iVb-1tFoZT3zhKw=s180" },
+      { name: "Clash Royale", img: "https://play-lh.googleusercontent.com/kA_ZQzQ_EimeISFRCGDpa2BkLomPvKgJo0vvArkH5-YWckHQwZ0pniS3pSkeCZMt3A=s180" },
+      { name: "Brawl Stars", img: "https://play-lh.googleusercontent.com/3P7LbcW2CYwiVdc0pVORdzdrIW6DCe4k_JvNysGEi2fRt8UmopvT2mtVZCENKz7lzg=s180" },
+      { name: "Arena of Valor", img: "https://play-lh.googleusercontent.com/IrT9jp-1rssZCvGSqtEtFPd0P_16GX2YeliYg5OtTSGTN7GaxzwoMP_EjSPdZRhqYw=s180" },
+      { name: "Wild Rift", img: "https://play-lh.googleusercontent.com/5tZ342XQI3_ZapGIVVzOohc21FYR-YjlWHowpIDZoPWnB7RsxMFyp4PBwBynpLmRvw=s180" },
+      { name: "Apex Legends Mobile", img: "https://play-lh.googleusercontent.com/No2m30IZHuZOKhHvJ3C0cFLbFhF38sZ4N2VNivg3XcX4Jt9V7H5PHeTtNKgHdw-AVP8=s180" },
+      { name: "Minecraft", img: "https://play-lh.googleusercontent.com/oAJM2ngiZX0xi2Pz9vywgq6Z9erjRzCQXDpUe1koRaSP-L-KFq5pFwchAuC8W9jA8w=s180" },
+      { name: "Steam Wallet", img: "https://store.cloudflare.steamstatic.com/public/shared/images/header/globalheader_logo.png" },
+      { name: "Google Play Voucher", img: "https://play-lh.googleusercontent.com/j2YsmiVjCwXTlzAIXazhbugzuDUFcPRl1BDpRP70dNDO7x-heuIKPQ4jPcgUp3_LyA=s180" },
+      { name: "iTunes Gift Card", img: "https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png" },
+      { name: "PlayStation Voucher", img: "https://upload.wikimedia.org/wikipedia/commons/0/05/PlayStation_logo.svg" },
+      { name: "Nintendo eShop", img: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Nintendo_eShop_logo.svg" },
+    ];
+
+    const grid = document.getElementById("gameGrid");
+
+    games.forEach((game) => {
+      const card = document.createElement("div");
+      card.className = "game-card";
+      card.innerHTML = `
+        <img src="${game.img}" alt="${game.name}">
+        <span>${game.name}</span>
+      `;
+      card.onclick = () => {
+        const message = `Halo admin, saya mau top up game: ${game.name}%0AID/UID saya: __________%0ATolong kirimkan list harga nya ya.`;
+        window.open(`https://wa.me/${waNumber}?text=${message}`, "_blank");
+      };
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
